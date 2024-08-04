@@ -26,6 +26,10 @@ class RegisterView(View):
             user: bool = User.objects.filter(email__exact=user_email).exists()
             if user == True:
                 register_form.add_error('email', 'ایمیل وارد شده قبلا در این سایت ثبت نام کرده است')
+                context = {
+                    'register_form': register_form
+                }
+                return render(request, 'account_module/register.html', context)
             else:
                 new_user = User(email=user_email,
                                 email_active_code=get_random_string(72),
@@ -144,3 +148,5 @@ class LogOutView(View):
     def get(self,request):
         logout(request)
         return redirect(reverse('login-page'))
+    
+        

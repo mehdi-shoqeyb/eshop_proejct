@@ -1,6 +1,7 @@
 {% extends 'shared/_layout.html' %}
 {% load thumbnail %}
 {% load poll_extras %}
+{% load static %}
 
 {% block title %}
     فروشگاه تاپ لرن | صفحه اصلی
@@ -413,4 +414,82 @@
             </div>
         </div>
     </section>
+    <!--chat-box-->
+
+    <section class="chatbox-wrapper">
+        <div class="chatbox-toggle">
+            <i class="ri-message-3-line" ></i>
+        </div>
+        {% if not request.user.is_superuser %}
+        <div class="chatbox-message-wrapper">
+            {% comment %} conversation header {% endcomment %}
+            <div class="chatbox-message-header" >
+                <div class="chatbox-message-profile">
+                    <i class="ri-customer-service-2-line"></i>
+                    <div>
+                        <h4 class="chatbox-message-name">پشتیبانی</h4>
+                        <p class="chatbox-message-status">آنلاین</p>
+                        <p class="chatbox-message-status">آفلاین</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbox-message-content"> 
+                {% if request.user.is_authenticated %}
+                <div id="is_authenticated" value="True" ></div>
+                <div id="room_data" data-room-id="{{ room_id }}" style="display: none;"></div>
+                <div id="username" data-user-name="{{ username }}" style="display: none;"></div>
+                {% else %}
+                <div id="is_authenticated" value="False" ></div>
+                {% endif %}
+            
+                <div class="contact__us-conversation" id="conversation-wrapper">
+                    <div class="login__conversation-wrapper" id="login-wrapper">
+                        <p class="login__wrapper-text">دوست عزیز بنظر می رسد حساب کاربری ندارید ! <br/>
+                            برای ساخت حساب موقت ایمیل خود را وارد کنید
+                        </p>
+                        <p class="login__wrapper-text">ایمیل :</p>
+                        <form class="contact__us-conversation-form" action='#' id="login-from">
+                            {% csrf_token %}
+                            <input  class="contact__us-conversation-input" placeholder="اینجا بنویسید ..."
+                            id='login-input'></input>
+                            <h4 id='login-problem'><h4>
+                            <button class="contact__us-conversation-input-submit" id="login-button" type="submit">
+                                <i class="ri-send-plane-2-line" id='login-btn-2'></i>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!--otp-->
+                    <div class="otp__conversation-wrapper" id="otp-wrapper">
+                        <h4>رمز یکبار مصرف را وارد کنید</h4>
+                        <form class="otp__field-form" id='otp-form' action="#">
+                            <div class="otp__field-wrapper">
+                                {% csrf_token %}
+                                <input type="number" class="otp__conversation-input" />
+                                <input type="number" class="otp__conversation-input" disabled />
+                                <input type="number" class="otp__conversation-input" disabled />
+                                <input type="number" class="otp__conversation-input" disabled />
+                                <input type="number" class="otp__conversation-input" disabled />
+                                <input type="number" class="otp__conversation-input" disabled />
+                            </div>
+                            <button class="otp__sub-but" id="otp-next-conversation" type="submit">تایید</button>
+                        </form>
+                    </div>
+                    <h4 class="chatbox-message-no-message" id="no-message">!هنوز پیامی ارسال نکردید</h4>
+                    </div>
+                </div>
+            
+                <div class="chatbox-message-bottom">
+                    <form class="chatbox-message-form">
+                        <textarea class="chatbox-message-input" rows="1" placeholder="اینجا بنویسید ..."></textarea>
+                        <button class="chatbox-message-submit" type="submit">
+                            <i class="ri-send-plane-2-line"></i>
+                        </button>
+                    </form>
+                </div>
+            {% comment %} end conversation bottom {% endcomment %}
+        </div>
+        {% endif %}
+    </section>
+    
 {% endblock %}
