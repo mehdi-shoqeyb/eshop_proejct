@@ -39,8 +39,8 @@ pip install -r requirements.txt
 ```
 
 
-3. Init database and runserver
+4. Chat using
 ```bash
-./manage.py migrate
-./manage.py runserver
-```
+if you want to use chat in the project you sould run redis
+
+``` 
