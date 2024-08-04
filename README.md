@@ -16,14 +16,26 @@ cd eshop_project
 
 1. Ideally, create a [virtualenv](https://docs.python-guide.org/dev/virtualenvs/) and install the projects dependencies:
 ```bash
-python3 -m venv env
-source env/bin/activate
+on mac:
+    python3 -m venv env
+    source env/bin/activate
+
+on windows:
+    python -m venv env
+    env\scripts\activate
 ```
 
 2. Install requirements
 ```bash
 pip install -r requirements.txt
 ```
+
+3. Init database and runserver
+```bash
+./manage.py migrate
+./manage.py runserver
+```
+
 
 3. Init database and runserver
 ```bash
