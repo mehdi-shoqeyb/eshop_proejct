@@ -27,6 +27,8 @@ on windows:
 
 2. Install requirements
 ```bash
+if you are using linux delete twisted-iocpsupport==1.0.4 in requirements.txt
+
 pip install -r requirements.txt
 ```
 
